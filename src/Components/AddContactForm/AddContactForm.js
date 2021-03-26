@@ -9,8 +9,6 @@ import { addContact } from '../../redux-toolkit/contacts/contactsOperations';
 // Selectors
 import { getItems } from '../../redux-toolkit/contacts/contactsSelectors';
 
-let id = 0; //! test
-
 const AddContactForm = () => {
   // state
   const [name, setName] = useState('');
@@ -25,8 +23,7 @@ const AddContactForm = () => {
   const onFormSubmit = event => {
     event.preventDefault();
     const names = items.map(contact => contact.name);
-    id += 1; //! test
-    const contact = { name, number, id: id.toString() };
+    const contact = { name, number };
     names.includes(name) ? alert(`${name} is already in contacts.`) : dispatch(addContact(contact));
     formReset();
   };
