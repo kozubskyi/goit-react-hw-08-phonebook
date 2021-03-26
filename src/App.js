@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { useDispatch /*useSelector*/ } from 'react-redux';
+import { Redirect, Route, Switch /*useHistory*/ } from 'react-router-dom';
 // Styles
 import './App.scss';
 // Components
@@ -10,7 +10,7 @@ import PublicRoute from './Components/PublicRoute';
 // Oprerations
 import { getCurrentUser } from './redux-toolkit/auth/authOperations';
 //Selectors
-import { getIsAuthenticated } from './redux-toolkit/auth/authSelectors';
+// import { getIsAuthenticated } from './redux-toolkit/auth/authSelectors';
 // Others
 import routes from './routes';
 // Pages
@@ -20,13 +20,13 @@ const LoginPage = lazy(() => import('./Pages/LoginPage'));
 const ContactsPage = lazy(() => import('./Pages/ContactsPage'));
 
 const App = () => {
-  const isAuthenticated = useSelector(state => getIsAuthenticated(state));
+  // const isAuthenticated = useSelector(state => getIsAuthenticated(state));
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory(); // вроде как не нужен
 
   useEffect(() => {
     dispatch(getCurrentUser());
-    isAuthenticated && history.push(routes.contacts);
+    // isAuthenticated && history.push(routes.contacts);
     // eslint-disable-next-line
   }, []);
 

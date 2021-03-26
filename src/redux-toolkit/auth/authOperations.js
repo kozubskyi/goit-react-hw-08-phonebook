@@ -63,16 +63,14 @@ export const getCurrentUser = () => (dispatch, getState) => {
     auth: { token: persistedToken },
   } = getState();
 
-  if (!persistedToken) {
-    return;
+  if (persistedToken) {
+    token.set(persistedToken);
+
+    dispatch(authActions.getCurrentUserRequest());
+
+    axios
+      .get('/users/current')
+      .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
+      .catch(error => dispatch(authActions.getCurrentUserError(error.message)));
   }
-
-  token.set(persistedToken);
-
-  dispatch(authActions.getCurrentUserRequest());
-
-  axios
-    .get('/users/current')
-    .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
-    .catch(error => dispatch(authActions.getCurrentUserError(error.message)));
 };
